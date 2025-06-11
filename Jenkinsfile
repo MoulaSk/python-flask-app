@@ -4,9 +4,11 @@ pipeline {
         SERVER_IP = credentials('prod-server-ip')
     }
     stages {
-        stage('Code') {
-            steps {
-                sh "pip install -r requirements.txt"
+       stage('Setup') {
+    steps {
+        sh 'python3 --version'
+        sh 'python3 -m pip install --upgrade pip'
+        sh 'python3 -m pip install -r requirements.txt'
             }
         }
         stage('Test') {
