@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SERVER_IP = credentials('prod-server-ip')
-        GIT_SCM = 'https://github.com/srikanth1260-tech/python-flask-app.git'
+        GIT_SCM = 'https://github.com/MoulaSk/python-flask-app.git'
     }
     stages {
         stage ("Clean WS") {
