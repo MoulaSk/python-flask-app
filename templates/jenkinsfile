@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Code') {
+            steps {
+                echo "Code already present in workspace. Skipping Git clone."
+            }
+        }
+
+        stage('Install') {
+            steps {
+                echo "Installing Python dependencies (optional, inside Docker)..."
+                
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "No tests provided. Skipping test stage."
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying Flask app on single server..."
+                sh 'bash method-1-single-server/deployment-script.sh'
+            }
+        }
+    }
+}
+
+
+
