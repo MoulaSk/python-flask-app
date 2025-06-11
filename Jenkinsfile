@@ -4,11 +4,11 @@ pipeline {
         SERVER_IP = credentials('prod-server-ip')
     }
     stages {
-       stage('Setup') {
+      stage('Setup') {
     steps {
-        sh 'python3 --version'
-        sh 'python3 -m pip install --upgrade pip'
-        sh 'python3 -m pip install -r requirements.txt'
+        sh '/usr/local/bin/python3.10 --version'
+        sh '/usr/local/bin/python3.10 -m pip install --upgrade pip'
+        sh '/usr/local/bin/python3.10 -m pip install -r requirements.txt'
             }
         }
         stage('Test') {
