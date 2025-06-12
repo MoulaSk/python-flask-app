@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SERVER_IP = credentials('prod-server-ip')
-        GIT_SCM = 'https://github.com/MoulaSk/python-flask-app.git'
+    
     }
     stages {
         stage ("Clean WS") {
@@ -18,20 +18,12 @@ pipeline {
         }
         stage('Setup') {
             steps {
-              sh '''
-            python3.10 -m venv venv
-            source venv/bin/activate
-            pip install --upgrade pip
-            pip install -r requirements.txt
-        '''
+              sh "pip install -r requirements.txt"
             }
         }
         stage('Test') {
             steps {
-                 sh '''
-                    . venv/bin/activate
-                    python -m pytest
-                '''
+                 sh "python -m pytest"
             }
         }
         stage('Package code') {
