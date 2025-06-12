@@ -23,10 +23,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                 sh '''
-            source venv/bin/activate
-            python -m pytest
-        '''
+                sh "python -m pytest"
             }
         }
         stage('Package code') {
