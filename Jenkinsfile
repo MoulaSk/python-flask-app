@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         SERVER_IP = credentials('prod-server-ip')
-    
     }
     stages {
         stage ("Clean WS") {
@@ -13,7 +12,7 @@ pipeline {
         }
         stage("checkout") {
             steps {
-                git url: "$GIT_SCM", branch: 'main'
+                checkout scm
             }
         }
         stage('Setup') {
