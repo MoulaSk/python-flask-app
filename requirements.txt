@@ -20,7 +20,7 @@ MarkupSafe==2.1.4
 packaging==23.2
 pluggy==1.2.0
 proto-plus==1.23.0
-protobuf==4.25.2
+protobuf==4.24.4
 pyasn1==0.5.1
 pyasn1-modules==0.3.0
 pytest==7.4.4
