@@ -24,26 +24,19 @@ pipeline {
 
             }
         }
+stage('Deploy to Prod') {
+    steps {
+        withCredentials([sshUserPrivateKey(credentialsId: 'MY_SSH_KEY', keyFileVariable: 'MY_SSH_KEY', usernameVariable: 'username')]) {
+            sh '''
+scp -i $MY_SSH_KEY -o StrictHostKeyChecking=no myapp.zip ${username}@${SERVER_IP}:/home/ec2-user/
 
-        stage('Deploy to Prod') {
-            steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'MY_SSH_KEY', keyFileVariable: 'MY_SSH_KEY', usernameVariable: 'username')]) {
-                    sh '''
-                        scp -i $MY_SSH_KEY -o StrictHostKeyChecking=no myapp.zip ${username}@${SERVER_IP}:/home/ec2-user/
-
-                        ssh -i $MY_SSH_KEY -o StrictHostKeyChecking=no ${username}@${SERVER_IP} << 'EOF'
-                            cd /home/ec2-user/
-                            rm -rf app/
-                            unzip -o myapp.zip -d app/
-
-                            cd app/
-                            python3 -m venv venv
-                            source venv/bin/activate
-                            pip install -r requirements.txt
-
-                            sudo systemctl restart flaskapp.service || echo "Service not found"
-                        EOF
-                    '''
+ssh -i $MY_SSH_KEY -o StrictHostKeyChecking=no ${username}@${SERVER_IP} << 'EOF'
+  unzip -o /home/ec2-user/myapp.zip -d /home/ec2-user/app/
+  cd /home/ec2-user/app/
+  ./venv/bin/pip install -r requirements.txt
+  sudo systemctl restart flaskapp.service
+EOF
+'''
                 }
             }
         }
