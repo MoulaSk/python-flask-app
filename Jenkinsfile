@@ -4,33 +4,24 @@ pipeline {
     environment {
         SERVER_IP = credentials('prod-server-ip')
     }
-
     stages {
         stage('Setup') {
             steps {
-                sh '''
-                    python3 -m venv venv
-                    source venv/bin/activate
-                    pip install -r requirements.txt
-                '''
+            sh "pip install -r requirements.txt"
+
             }
         }
-
         stage('Test') {
             steps {
-                sh '''
-                    source venv/bin/activate
-                    pytest
-                '''
+             sh "pytest"
             }
         }
 
         stage('Package code') {
             steps {
-                sh '''
-                    zip -r myapp.zip ./* -x '*.git*' 'venv/*'
-                    ls -lart
-                '''
+                sh "zip -r myapp.zip ./* -x '*.git*'"
+                sh "ls -lart"
+
             }
         }
 
