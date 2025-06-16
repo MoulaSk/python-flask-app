@@ -44,7 +44,7 @@ pipeline {
                             sudo systemctl daemon-reexec
                             sudo systemctl daemon-reload
                             sudo systemctl restart flaskapp.service
-                        EOF
+                        <<EOF
                     '''
                 }
             }
