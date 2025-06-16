@@ -33,6 +33,8 @@ scp -i $MY_SSH_KEY -o StrictHostKeyChecking=no myapp.zip ${username}@${SERVER_IP
 ssh -i $MY_SSH_KEY -o StrictHostKeyChecking=no ${username}@${SERVER_IP} << 'EOF'
   unzip -o /home/ec2-user/myapp.zip -d /home/ec2-user/app/
   cd /home/ec2-user/app/
+  python3 -m venv venv
+  ./venv/bin/pip install --upgrade pip
   ./venv/bin/pip install -r requirements.txt
   sudo systemctl restart flaskapp.service
 EOF
